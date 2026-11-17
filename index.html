@@ -1,0 +1,2251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Seat Finder — Garden Hive Events Place</title>
+
+  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans (with graceful system fallbacks) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================================
+       1. DESIGN TOKENS & RESET — DUSTY BLUE WEDDING PALETTE
+       ========================================================================= */
+    :root {
+      --bg-ivory: #F7FAFC;
+      --bg-cream: #EEF4F8;
+      --bg-card: #FFFFFF;
+      --border-champagne: #D3E0EA;
+      --burgundy: #4A6B82;
+      --burgundy-dark: #355063;
+      --burgundy-soft: rgba(74, 107, 130, 0.11);
+      --dusty-medium: #6B8EA6;
+      --dusty-light: #A3BFD1;
+      --gold: #B59E7A;
+      --gold-dark: #8C7756;
+      --gold-soft: rgba(181, 158, 122, 0.16);
+      --text-charcoal: #233542;
+      --text-muted: #5C707E;
+      --shadow-soft: 0 12px 32px -6px rgba(35, 53, 66, 0.08);
+      --shadow-elevated: 0 20px 40px -10px rgba(35, 53, 66, 0.15);
+      --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-ivory);
+      color: var(--text-charcoal);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-image: radial-gradient(#CBDCE8 0.9px, transparent 0.9px);
+      background-size: 24px 24px;
+    }
+
+    button, input {
+      font-family: inherit;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* =========================================================================
+       2. HEADER & LAYOUT CONTAINER
+       ========================================================================= */
+    .top-ribbon {
+      height: 6px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--dusty-light), var(--burgundy), var(--gold), var(--burgundy), var(--dusty-light));
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    header.hero {
+      text-align: center;
+      padding: 2.25rem 1rem 1.5rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .venue-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.35rem 0.95rem;
+      border-radius: 9999px;
+      background: var(--bg-cream);
+      border: 1px solid var(--border-champagne);
+      color: var(--burgundy);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.1rem, 5vw, 3.1rem);
+      font-weight: 700;
+      color: var(--text-charcoal);
+      line-height: 1.15;
+    }
+
+    .hero p {
+      margin-top: 0.6rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    /* =========================================================================
+       3. SEARCH BAR & AUTOCOMPLETE DROPDOWN
+       ========================================================================= */
+    .search-wrapper {
+      position: relative;
+      max-width: 620px;
+      margin: 0 auto 1.75rem;
+      z-index: 40;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: var(--bg-card);
+      border: 2px solid var(--border-champagne);
+      border-radius: 1rem;
+      box-shadow: var(--shadow-soft);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      padding: 0.25rem 0.5rem 0.25rem 1rem;
+    }
+
+    .search-box:focus-within {
+      border-color: var(--burgundy);
+      box-shadow: 0 0 0 4px var(--burgundy-soft), var(--shadow-soft);
+    }
+
+    .search-icon {
+      color: var(--burgundy);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      padding: 0.85rem 0.75rem;
+      font-size: 1rem;
+      color: var(--text-charcoal);
+      outline: none;
+    }
+
+    .search-input::placeholder {
+      color: #8DA1B0;
+    }
+
+    .clear-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.5rem;
+      border-radius: 0.65rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .clear-btn:hover {
+      background: var(--bg-cream);
+      color: var(--text-charcoal);
+    }
+
+    .autocomplete-dropdown {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(100% + 0.5rem);
+      background: var(--bg-card);
+      border: 1px solid var(--border-champagne);
+      border-radius: 1rem;
+      box-shadow: var(--shadow-elevated);
+      max-height: 310px;
+      overflow-y: auto;
+      z-index: 50;
+    }
+
+    .dropdown-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.8rem 1.1rem;
+      border: none;
+      border-bottom: 1px solid var(--bg-cream);
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .dropdown-item:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-item:hover {
+      background: var(--bg-ivory);
+    }
+
+    .dropdown-name {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--text-charcoal);
+    }
+
+    .dropdown-sub {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.1rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .badge-vip {
+      background: var(--gold-soft);
+      color: var(--gold-dark);
+      border: 1px solid rgba(181, 158, 122, 0.42);
+    }
+
+    .badge-round {
+      background: var(--burgundy-soft);
+      color: var(--burgundy);
+      border: 1px solid rgba(74, 107, 130, 0.25);
+    }
+
+    /* =========================================================================
+       4. SEAT ASSIGNMENT RESULT CARD
+       ========================================================================= */
+    .result-card {
+      max-width: 680px;
+      margin: 0 auto 2rem;
+      background: var(--bg-card);
+      border: 1.5px solid var(--dusty-light);
+      border-radius: 1.35rem;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-elevated);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--burgundy), var(--dusty-medium), var(--gold));
+    }
+
+    .badge-round {
+      background: var(--burgundy-soft);
+      color: var(--burgundy);
+      border: 1px solid rgba(139, 38, 53, 0.2);
+    }
+
+    /* =========================================================================
+       4. SEAT ASSIGNMENT RESULT CARD
+       ========================================================================= */
+    .result-card {
+      max-width: 680px;
+      margin: 0 auto 2rem;
+      background: var(--bg-card);
+      border: 1.5px solid var(--gold);
+      border-radius: 1.35rem;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-elevated);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--burgundy), var(--gold));
+    }
+
+    .result-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .result-kicker {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--burgundy);
+    }
+
+    .result-title {
+      font-family: var(--font-serif);
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--text-charcoal);
+      margin-top: 0.15rem;
+    }
+
+    .landmark-banner {
+      margin-top: 0.85rem;
+      padding: 0.65rem 0.95rem;
+      border-radius: 0.85rem;
+      background: var(--bg-ivory);
+      border: 1px solid var(--border-champagne);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.84rem;
+      color: var(--text-charcoal);
+    }
+
+    .landmark-banner svg {
+      color: var(--gold-dark);
+      flex-shrink: 0;
+    }
+
+    .tablemates-box {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--bg-cream);
+    }
+
+    .tablemates-label {
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .tablemates-grid {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 0.4rem;
+    }
+
+    .tablemate-item {
+      font-size: 0.85rem;
+      padding: 0.38rem 0.65rem;
+      border-radius: 0.55rem;
+      color: var(--text-charcoal);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .tablemate-item.is-selected {
+      background: var(--burgundy-soft);
+      border: 1px solid rgba(74, 107, 130, 0.25);
+      font-weight: 700;
+      color: var(--burgundy-dark);
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border-champagne);
+      flex-shrink: 0;
+    }
+
+    .tablemate-item.is-selected .dot {
+      background: var(--burgundy);
+    }
+
+    .result-actions {
+      margin-top: 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.72rem 1.25rem;
+      border-radius: 0.8rem;
+      border: none;
+      background: var(--burgundy);
+      color: #FFFFFF;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--burgundy-dark);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.72rem 1.1rem;
+      border-radius: 0.8rem;
+      border: 1px solid var(--border-champagne);
+      background: var(--bg-cream);
+      color: var(--text-charcoal);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: var(--border-champagne);
+    }
+
+    /* =========================================================================
+       5. NAVIGATION TABS & FILTER TOOLBAR
+       ========================================================================= */
+    .toolbar-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-champagne);
+      margin-bottom: 1.5rem;
+    }
+
+    .segmented-tabs {
+      display: inline-flex;
+      background: var(--bg-cream);
+      padding: 0.3rem;
+      border-radius: 0.9rem;
+      border: 1px solid var(--border-champagne);
+    }
+
+    .tab-btn {
+      padding: 0.55rem 1.1rem;
+      border-radius: 0.68rem;
+      border: none;
+      background: transparent;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: var(--bg-card);
+      color: var(--burgundy);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .pill-btn {
+      padding: 0.45rem 0.85rem;
+      border-radius: 9999px;
+      border: 1px solid var(--border-champagne);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .pill-btn:hover {
+      border-color: var(--dusty-medium);
+      color: var(--burgundy);
+    }
+
+    .pill-btn.active {
+      background: var(--burgundy);
+      border-color: var(--burgundy);
+      color: #FFFFFF;
+    }
+
+    /* =========================================================================
+       6. ARCHITECTURAL FLOOR PLAN (GARDEN HIVE EVENTS PLACE)
+       ========================================================================= */
+    .floorplan-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    @media (min-width: 980px) {
+      .floorplan-layout {
+        grid-template-columns: minmax(0, 1.75fr) minmax(300px, 1fr);
+      }
+    }
+
+    .map-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-champagne);
+      border-radius: 1.35rem;
+      padding: 1.1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .map-controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--bg-cream);
+    }
+
+    .map-title-group h2 {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-charcoal);
+    }
+
+    .map-title-group p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .zoom-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--bg-ivory);
+      padding: 0.25rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--border-champagne);
+    }
+
+    .zoom-btn {
+      padding: 0.35rem 0.65rem;
+      border-radius: 0.55rem;
+      border: none;
+      background: var(--bg-card);
+      color: var(--text-charcoal);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: background 0.15s;
+    }
+
+    .zoom-btn:hover {
+      background: var(--bg-cream);
+    }
+
+    /* Scrollable/Zoomable Viewport for the Architectural Blueprint */
+    .blueprint-viewport {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      border-radius: 1rem;
+      background: #F9FBFD;
+      border: 1.5px solid var(--border-champagne);
+      position: relative;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .blueprint-canvas {
+      min-width: 720px;
+      transform-origin: top left;
+      transition: transform 0.25s ease;
+    }
+
+    .blueprint-svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      user-select: none;
+    }
+
+    /* Interactive SVG Table Styling */
+    .svg-table-group {
+      cursor: pointer;
+      transition: opacity 0.25s ease, filter 0.25s ease;
+    }
+
+    .svg-table-group:hover .table-shape {
+      stroke: var(--burgundy);
+      stroke-width: 3;
+      filter: drop-shadow(0 6px 12px rgba(74, 107, 130, 0.25));
+    }
+
+    .svg-table-group.is-dimmed {
+      opacity: 0.28;
+    }
+
+    @keyframes svgPulseRing {
+      0% {
+        r: 34;
+        opacity: 0.85;
+        stroke-width: 4;
+      }
+      100% {
+        r: 52;
+        opacity: 0;
+        stroke-width: 1;
+      }
+    }
+
+    @keyframes svgVipPulse {
+      0%, 100% {
+        stroke: var(--burgundy);
+        stroke-width: 3.5;
+        filter: drop-shadow(0 0 10px rgba(74, 107, 130, 0.65));
+      }
+      50% {
+        stroke: var(--dusty-medium);
+        stroke-width: 5;
+        filter: drop-shadow(0 0 18px rgba(107, 142, 166, 0.8));
+      }
+    }
+
+    .pulse-ring {
+      fill: none;
+      stroke: var(--burgundy);
+      pointer-events: none;
+      animation: svgPulseRing 1.6s infinite ease-out;
+    }
+
+    .svg-table-group.is-highlighted .table-shape {
+      fill: #E1EDF5 !important;
+      animation: svgVipPulse 1.6s infinite ease-in-out;
+    }
+
+    .svg-table-group.is-highlighted.is-vip .table-shape {
+      fill: #4A6B82 !important;
+      animation: svgVipPulse 1.6s infinite ease-in-out;
+    }
+
+    .map-legend {
+      margin-top: 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1.1rem;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    /* =========================================================================
+       7. SIDE / BOTTOM TABLE INSPECTOR PANEL
+       ========================================================================= */
+    .inspector-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-champagne);
+      border-radius: 1.35rem;
+      padding: 1.35rem;
+      box-shadow: var(--shadow-soft);
+      position: sticky;
+      top: 1.25rem;
+    }
+
+    .inspector-empty {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--text-muted);
+    }
+
+    .inspector-empty-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--bg-ivory);
+      border: 1px solid var(--border-champagne);
+      color: var(--gold-dark);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .inspector-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid var(--bg-cream);
+    }
+
+    .inspector-header h3 {
+      font-family: var(--font-serif);
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--text-charcoal);
+    }
+
+    .inspector-landmark {
+      margin-top: 0.75rem;
+      padding: 0.6rem 0.85rem;
+      border-radius: 0.75rem;
+      background: var(--bg-ivory);
+      border: 1px solid var(--border-champagne);
+      font-size: 0.8rem;
+      color: var(--text-charcoal);
+      line-height: 1.45;
+    }
+
+    .inspector-list {
+      list-style: none;
+      margin-top: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      max-height: 360px;
+      overflow-y: auto;
+    }
+
+    .inspector-guest {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.55rem 0.75rem;
+      border-radius: 0.7rem;
+      background: var(--bg-ivory);
+      font-size: 0.86rem;
+      color: var(--text-charcoal);
+      border: 1px solid transparent;
+    }
+
+    .inspector-guest.highlight-guest {
+      background: var(--burgundy-soft);
+      border-color: rgba(74, 107, 130, 0.35);
+      font-weight: 700;
+      color: var(--burgundy-dark);
+    }
+
+    .seat-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-champagne);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--burgundy);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    /* =========================================================================
+       8. DIRECTORY VIEW (BY TABLE OR A-Z ALPHABETICAL)
+       ========================================================================= */
+    .directory-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-champagne);
+      border-radius: 1.35rem;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .directory-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--bg-cream);
+      margin-bottom: 1.25rem;
+    }
+
+    .directory-header h2 {
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      font-weight: 700;
+    }
+
+    .dir-tables-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.15rem;
+    }
+
+    .dir-table-box {
+      background: var(--bg-ivory);
+      border: 1px solid var(--border-champagne);
+      border-radius: 1rem;
+      padding: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .dir-table-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 0.65rem;
+      margin-bottom: 0.65rem;
+      border-bottom: 1px solid var(--border-champagne);
+    }
+
+    .dir-table-head h3 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .dir-guest-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .dir-guest-btn {
+      width: 100%;
+      text-align: left;
+      padding: 0.38rem 0.55rem;
+      border-radius: 0.5rem;
+      border: none;
+      background: transparent;
+      font-size: 0.86rem;
+      color: var(--text-charcoal);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .dir-guest-btn:hover {
+      background: var(--bg-card);
+      color: var(--burgundy);
+    }
+
+    .alpha-group {
+      margin-bottom: 1.75rem;
+    }
+
+    .alpha-letter-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .alpha-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--burgundy);
+      color: #FFFFFF;
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .alpha-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border-champagne);
+    }
+
+    .alpha-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.6rem;
+    }
+
+    .alpha-item-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.65rem 0.9rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--border-champagne);
+      background: var(--bg-ivory);
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .alpha-item-btn:hover {
+      background: var(--bg-card);
+      border-color: var(--burgundy);
+    }
+
+    /* =========================================================================
+       9. FOOTER
+       ========================================================================= */
+    footer {
+      margin-top: auto;
+      padding: 1.75rem 1rem;
+      text-align: center;
+      border-top: 1px solid var(--border-champagne);
+      background: var(--bg-ivory);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    footer .serif-note {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--burgundy);
+      margin-bottom: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Decorative Top Accent Bar -->
+  <div class="top-ribbon"></div>
+
+  <!-- Header -->
+  <header class="hero">
+    <div class="venue-pill">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6-4.35-9-9a5.25 5.25 0 019-5.25A5.25 5.25 0 0121 12c-3 4.65-9 9-9 9z"/>
+      </svg>
+      <span>Garden Hive Events Place</span>
+    </div>
+    <h1>Find Your Wedding Seat</h1>
+    <p>
+      Welcome to our reception! Search your name below to locate your assigned table and see exactly where you are seated in the hall.
+    </p>
+  </header>
+
+  <main class="container" style="padding-bottom: 3.5rem;">
+
+    <!-- 1. Instant Search Bar -->
+    <section class="search-wrapper" aria-label="Guest Search">
+      <div class="search-box">
+        <span class="search-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </span>
+        <input
+          id="guestSearchInput"
+          class="search-input"
+          type="text"
+          autocomplete="off"
+          placeholder="Search first name, last name, or table (e.g., Diwa, VIP 1, Table 5)..."
+          aria-label="Search guest name or table"
+        />
+        <button id="clearSearchBtn" class="clear-btn hidden" type="button" title="Clear search" aria-label="Clear search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div id="autocompleteDropdown" class="autocomplete-dropdown hidden"></div>
+    </section>
+
+    <!-- 2. Selected Guest Seat Assignment Card -->
+    <section id="resultCard" class="result-card hidden" aria-live="polite">
+      <div class="result-header">
+        <div>
+          <span class="result-kicker">Confirmed Seating Assignment</span>
+          <h2 id="resultGuestName" class="result-title"></h2>
+        </div>
+        <span id="resultTableBadge" class="badge badge-round"></span>
+      </div>
+
+      <div class="landmark-banner">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 21c-4.418 0-8-4.03-8-9a8 8 0 1116 0c0 4.97-3.582 9-8 9z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <span id="resultLandmarkText"></span>
+      </div>
+
+      <div class="tablemates-box">
+        <p class="tablemates-label">
+          Table Roster (<span id="resultSeatCount"></span> Guests)
+        </p>
+        <ul id="resultTablematesList" class="tablemates-grid"></ul>
+      </div>
+
+      <div class="result-actions">
+        <button id="locateOnMapBtn" class="btn-primary" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+            <line x1="9" y1="3" x2="9" y2="18"></line>
+            <line x1="15" y1="6" x2="15" y2="21"></line>
+          </svg>
+          <span>Locate on Floor Plan</span>
+        </button>
+        <button id="clearSelectionBtn" class="btn-secondary" type="button">
+          Clear Selection
+        </button>
+      </div>
+    </section>
+
+    <!-- 3. View Switcher & Quick Section Filter Pills -->
+    <div class="toolbar-row">
+      <div class="segmented-tabs" role="tablist">
+        <button id="tabFloorPlan" class="tab-btn active" type="button" role="tab" aria-selected="true">
+          Interactive Floor Plan
+        </button>
+        <button id="tabDirectory" class="tab-btn" type="button" role="tab" aria-selected="false">
+          A–Z Guest Directory
+        </button>
+      </div>
+
+      <div id="floorPlanFilters" class="filter-pills" aria-label="Filter floor plan tables">
+        <button class="pill-btn active" type="button" data-filter="all">All Tables (12)</button>
+        <button class="pill-btn" type="button" data-filter="vip">VIP Tables</button>
+        <button class="pill-btn" type="button" data-filter="upper">Upper Side (Odd)</button>
+        <button class="pill-btn" type="button" data-filter="lower">Lower Side (Even)</button>
+      </div>
+    </div>
+
+    <!-- 4. INTERACTIVE FLOOR PLAN VIEW -->
+    <section id="floorPlanView" class="floorplan-layout">
+      
+      <!-- Left/Main Architectural Map Card -->
+      <div class="map-card">
+        <div class="map-controls-bar">
+          <div class="map-title-group">
+            <h2>Garden Hive Events Place — Reception Hall</h2>
+            <p>Tap any table to view guests &bull; Swipe horizontally on mobile</p>
+          </div>
+          <div class="zoom-controls" aria-label="Map zoom controls">
+            <button id="zoomOutBtn" class="zoom-btn" type="button" title="Zoom out">−</button>
+            <button id="zoomResetBtn" class="zoom-btn" type="button" title="Reset zoom">100%</button>
+            <button id="zoomInBtn" class="zoom-btn" type="button" title="Zoom in">+</button>
+          </div>
+        </div>
+
+        <div id="blueprintViewport" class="blueprint-viewport">
+          <div id="blueprintCanvas" class="blueprint-canvas">
+            <!-- Architectural SVG Floor Plan matching Garden Hive Events Place (Dusty Blue Theme, Table 11 Removed) -->
+            <svg
+              id="gardenHiveSvg"
+              class="blueprint-svg"
+              viewBox="0 0 960 540"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Garden Hive Events Place Floor Plan showing Stage, VIP 1, VIP 2, Center Carpet, Buffet, Entrances, and Round Tables 1 through 10"
+            >
+              <defs>
+                <pattern id="gridPattern" width="24" height="24" patternUnits="userSpaceOnUse">
+                  <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#E5EFF6" stroke-width="0.8"/>
+                </pattern>
+                <linearGradient id="carpetGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#DCE8F1"/>
+                  <stop offset="50%" stop-color="#C5D9E8"/>
+                  <stop offset="100%" stop-color="#DCE8F1"/>
+                </linearGradient>
+                <linearGradient id="stageGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#E6EFF6"/>
+                  <stop offset="100%" stop-color="#D2E2EE"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Outer Background Grid -->
+              <rect x="0" y="0" width="960" height="540" fill="url(#gridPattern)"/>
+
+              <!-- Main Hall Architectural Perimeter Walls -->
+              <rect x="44" y="42" width="872" height="452" rx="10" fill="#FFFFFF" stroke="#355063" stroke-width="3.5"/>
+
+              <!-- Top Corridor / Restrooms & Top Staircase Architectural Outline -->
+              <rect x="44" y="14" width="490" height="28" fill="#F2F7FA" stroke="#7A93A6" stroke-width="1.5"/>
+              <text x="289" y="32" text-anchor="middle" font-size="9.5" font-weight="700" fill="#5C707E" letter-spacing="1.2">UPPER CORRIDOR / STAIRS</text>
+
+              <!-- Restroom Block (Top Middle-Right) -->
+              <rect x="534" y="10" width="96" height="32" fill="#EAF1F6" stroke="#5C707E" stroke-width="1.5"/>
+              <line x1="582" y1="10" x2="582" y2="42" stroke="#5C707E" stroke-width="1.2"/>
+              <text x="582" y="29" text-anchor="middle" font-size="9" font-weight="700" fill="#355063">RESTROOMS</text>
+
+              <!-- TOP ENTRANCE (Upper Right, near VIP 1) -->
+              <g transform="translate(755, 24)">
+                <rect x="-42" y="8" width="84" height="18" rx="4" fill="#EEF4F8" stroke="#4A6B82" stroke-width="1.5"/>
+                <text x="0" y="20" text-anchor="middle" font-size="9.5" font-weight="800" fill="#233542" letter-spacing="0.8">ENTRANCE</text>
+                <!-- Door Swing Arcs -->
+                <path d="M -24 26 A 22 22 0 0 0 -2 46" fill="none" stroke="#6B8EA6" stroke-width="1.2" stroke-dasharray="3,2"/>
+                <path d="M 24 26 A 22 22 0 0 1 2 46" fill="none" stroke="#6B8EA6" stroke-width="1.2" stroke-dasharray="3,2"/>
+              </g>
+
+              <!-- BOTTOM ENTRANCE (Lower Left-Center, below Tables 8 & 10) -->
+              <g transform="translate(335, 484)">
+                <rect x="-44" y="0" width="88" height="20" rx="4" fill="#EEF4F8" stroke="#4A6B82" stroke-width="1.5"/>
+                <text x="0" y="13.5" text-anchor="middle" font-size="9.5" font-weight="800" fill="#233542" letter-spacing="0.8">ENTRANCE</text>
+                <!-- Door Swing Arcs -->
+                <path d="M -24 0 A 22 22 0 0 1 -2 -20" fill="none" stroke="#6B8EA6" stroke-width="1.2" stroke-dasharray="3,2"/>
+                <path d="M 24 0 A 22 22 0 0 0 2 -20" fill="none" stroke="#6B8EA6" stroke-width="1.2" stroke-dasharray="3,2"/>
+              </g>
+
+              <!-- LEFT WALL: BUFFET STATION (Upper-Left to Mid-Left) -->
+              <g>
+                <rect x="62" y="60" width="38" height="238" rx="6" fill="#5C707E" stroke="#355063" stroke-width="2"/>
+                <text x="81" y="179" text-anchor="middle" font-size="13" font-weight="800" fill="#FFFFFF" letter-spacing="2.5" transform="rotate(90 81 179)">
+                  BUFFET
+                </text>
+              </g>
+
+              <!-- BOTTOM-LEFT CORNER: CURVED SPIRAL STAIRCASE -->
+              <g transform="translate(62, 330)">
+                <path d="M 0 0 L 72 0 A 72 72 0 0 1 0 72 Z" fill="#F2F7FA" stroke="#7A93A6" stroke-width="1.5"/>
+                <line x1="0" y1="0" x2="68" y2="18" stroke="#A3BFD1" stroke-width="1"/>
+                <line x1="0" y1="0" x2="58" y2="38" stroke="#A3BFD1" stroke-width="1"/>
+                <line x1="0" y1="0" x2="42" y2="56" stroke="#A3BFD1" stroke-width="1"/>
+                <line x1="0" y1="0" x2="22" y2="66" stroke="#A3BFD1" stroke-width="1"/>
+                <text x="26" y="25" font-size="8.5" font-weight="700" fill="#5C707E">STAIRS UP</text>
+              </g>
+
+              <!-- RIGHT WALL: TOP LED WALL, CENTER STAGE, BOTTOM LED WALL -->
+              <!-- Top LED Wall -->
+              <g>
+                <rect x="864" y="56" width="36" height="114" rx="5" fill="#7D9EB5" stroke="#4A6B82" stroke-width="2"/>
+                <text x="882" y="113" text-anchor="middle" font-size="10.5" font-weight="800" fill="#FFFFFF" letter-spacing="1.2" transform="rotate(90 882 113)">
+                  LED WALL
+                </text>
+              </g>
+
+              <!-- Center Stage -->
+              <g>
+                <rect x="850" y="182" width="52" height="156" rx="7" fill="url(#stageGrad)" stroke="#4A6B82" stroke-width="2.5"/>
+                <text x="876" y="260" text-anchor="middle" font-size="14" font-weight="800" fill="#233542" letter-spacing="3" transform="rotate(90 876 260)">
+                  STAGE
+                </text>
+              </g>
+
+              <!-- Bottom LED Wall -->
+              <g>
+                <rect x="864" y="350" width="36" height="114" rx="5" fill="#7D9EB5" stroke="#4A6B82" stroke-width="2"/>
+                <text x="882" y="407" text-anchor="middle" font-size="10.5" font-weight="800" fill="#FFFFFF" letter-spacing="1.2" transform="rotate(90 882 407)">
+                  LED WALL
+                </text>
+              </g>
+
+              <!-- BOTTOM-RIGHT WALL: SOUND SYSTEM -->
+              <g>
+                <rect x="625" y="454" width="215" height="32" rx="5" fill="#7D9EB5" stroke="#4A6B82" stroke-width="2"/>
+                <text x="732.5" y="474" text-anchor="middle" font-size="11.5" font-weight="800" fill="#FFFFFF" letter-spacing="1.8">
+                  SOUND SYSTEM
+                </text>
+              </g>
+
+              <!-- CENTER HORIZONTAL CARPET AISLE -->
+              <g>
+                <rect x="225" y="246" width="625" height="32" rx="4" fill="url(#carpetGrad)" stroke="#8BA8BD" stroke-width="1.5"/>
+                <text x="537" y="266.5" text-anchor="middle" font-size="13" font-weight="800" fill="#233542" letter-spacing="8">
+                  CARPET AISLE
+                </text>
+              </g>
+
+              <!-- STRUCTURAL PILLARS (POST 1 & POST 2 Flanking the Carpet) -->
+              <!-- Post 1 (Above Carpet, near Table 1 & Table 5) -->
+              <g>
+                <rect x="556" y="220" width="26" height="22" rx="3" fill="#CBDCE8" stroke="#355063" stroke-width="2"/>
+                <text x="569" y="213" text-anchor="middle" font-size="8.5" font-weight="800" fill="#355063">POST 1</text>
+              </g>
+              <!-- Post 2 (Below Carpet, near Table 2 & Table 6) -->
+              <g>
+                <rect x="556" y="282" width="26" height="22" rx="3" fill="#CBDCE8" stroke="#355063" stroke-width="2"/>
+                <text x="569" y="315" text-anchor="middle" font-size="8.5" font-weight="800" fill="#355063">POST 2</text>
+              </g>
+
+              <!-- Subtle Dividing Line between VIP Area & Round Tables -->
+              <line x1="569" y1="44" x2="569" y2="218" stroke="#BDD1DF" stroke-width="1.2" stroke-dasharray="4,4"/>
+              <line x1="569" y1="318" x2="569" y2="492" stroke="#BDD1DF" stroke-width="1.2" stroke-dasharray="4,4"/>
+
+              <!-- ===============================================================
+                   INTERACTIVE TABLES LAYER (Populated via JavaScript)
+                   =============================================================== -->
+              <g id="svgTablesLayer"></g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Floor Plan Legend -->
+        <div class="map-legend">
+          <div class="legend-item">
+            <span class="swatch" style="background:#4A6B82; border:1.5px solid #B59E7A;"></span>
+            <span>VIP Banquet Table (12 Guests)</span>
+          </div>
+          <div class="legend-item">
+            <span class="swatch" style="background:#F7FAFC; border:1.5px solid #4A6B82; border-radius:50%;"></span>
+            <span>Round Guest Table (8–10 Guests)</span>
+          </div>
+          <div class="legend-item">
+            <span class="swatch" style="background:#C5D9E8; border:1px solid #8BA8BD;"></span>
+            <span>Center Carpet</span>
+          </div>
+          <div class="legend-item">
+            <span class="swatch" style="background:#CBDCE8; border:1.5px solid #355063;"></span>
+            <span>Hall Pillar</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right / Bottom Inspector Card (Shows clicked or searched table details) -->
+      <aside class="inspector-card" aria-label="Selected Table Details">
+        <div id="inspectorEmptyState" class="inspector-empty">
+          <div class="inspector-empty-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+          </div>
+          <h3 style="font-family:var(--font-serif); font-size:1.3rem; color:var(--text-charcoal); margin-bottom:0.35rem;">
+            Select Any Table
+          </h3>
+          <p style="font-size:0.84rem; line-height:1.5;">
+            Tap any table on the Garden Hive floor plan or search your name above to see everyone seated at that table.
+          </p>
+        </div>
+
+        <div id="inspectorPopulatedState" class="hidden">
+          <div class="inspector-header">
+            <div>
+              <span id="inspectorKicker" style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--burgundy);">
+                Table Roster
+              </span>
+              <h3 id="inspectorTitle"></h3>
+            </div>
+            <span id="inspectorCountBadge" class="badge badge-round"></span>
+          </div>
+
+          <div id="inspectorLandmark" class="inspector-landmark"></div>
+
+          <ul id="inspectorGuestList" class="inspector-list"></ul>
+        </div>
+      </aside>
+
+    </section>
+
+    <!-- 5. A–Z GUEST DIRECTORY VIEW -->
+    <section id="directoryView" class="directory-card hidden">
+      <div class="directory-header">
+        <div>
+          <h2>Complete Wedding Guest Directory</h2>
+          <p style="font-size:0.84rem; color:var(--text-muted); margin-top:0.2rem;">
+            118 total guests across 2 VIP tables and 10 round tables
+          </p>
+        </div>
+
+        <div class="segmented-tabs">
+          <button id="dirSortAlphaBtn" class="tab-btn active" type="button">A–Z Alphabetical</button>
+          <button id="dirSortTableBtn" class="tab-btn" type="button">Grouped by Table</button>
+        </div>
+      </div>
+
+      <div id="directoryContent"></div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p class="serif-note">We are so grateful to celebrate this special day with you</p>
+    <p>Garden Hive Events Place &bull; Reception Seating Finder</p>
+  </footer>
+
+  <!-- =========================================================================
+       APPLICATION DATA & INTERACTIVE LOGIC
+       ========================================================================= -->
+  <script>
+    // 1. EXACT WEDDING SEATING DATA (12 Tables, 118 Guests — Round Table 11 Removed)
+    // Coordinates (x, y) match the Garden Hive Events Place architectural floor plan
+    const SEATING_DATA = [
+      {
+        id: "VIP 1",
+        label: "VIP 1",
+        shortLabel: "VIP 1",
+        type: "vip",
+        section: "vip",
+        shape: "rect",
+        x: 735,
+        y: 136,
+        width: 136,
+        height: 44,
+        landmark: "Front-right VIP banquet table, facing the Center Carpet just below the Top Entrance and near the Stage.",
+        guests: [
+          "Lorydel Sy",
+          "May Diwa",
+          "Elvira Denulan",
+          "Ma. Cecil F. Estolano",
+          "Cristina B. Llaban",
+          "Glaiza Postrado",
+          "Jeffrey Alquero",
+          "Arnie De Guia",
+          "Felicisimo Diwa",
+          "Nemesio Paredes",
+          "Joseph Yu",
+          "Roselle Yu"
+        ]
+      },
+      {
+        id: "VIP 2",
+        label: "VIP 2",
+        shortLabel: "VIP 2",
+        type: "vip",
+        section: "vip",
+        shape: "rect",
+        x: 735,
+        y: 382,
+        width: 136,
+        height: 44,
+        landmark: "Front-right VIP banquet table, facing the Center Carpet just above the Sound System and near the Stage.",
+        guests: [
+          "Emmanuel Diwa",
+          "Aida Diwa",
+          "Arrianne Baul",
+          "Kiyel Baul",
+          "Gertrude Avenido",
+          "Johnry Avenido",
+          "+Renato Avenido",
+          "Jocelyn Avenido",
+          "Ursicia Berong",
+          "Jun Berong",
+          "Rosila Tiongco",
+          "Fr. Col Carlito T. Buslon"
+        ]
+      },
+      {
+        id: "ROUND TABLE 1",
+        label: "Round Table 1",
+        shortLabel: "1",
+        type: "round",
+        section: "upper",
+        shape: "circle",
+        x: 526,
+        y: 138,
+        r: 33,
+        landmark: "Upper side (above the Center Carpet), front-right of the round tables just above Post 1 and left of VIP 1.",
+        guests: [
+          "Cedric Fernandez",
+          "Lance Mendoza",
+          "Emman Fernandez",
+          "Arianne Gumpal",
+          "Claudine Rivera",
+          "Arviel Rivera",
+          "Chris Santos",
+          "Gregorio Simangan",
+          "Jeremiah Reyes",
+          "Sophie Compañero"
+        ]
+      },
+      {
+        id: "ROUND TABLE 2",
+        label: "Round Table 2",
+        shortLabel: "2",
+        type: "round",
+        section: "lower",
+        shape: "circle",
+        x: 526,
+        y: 382,
+        r: 33,
+        landmark: "Lower side (below the Center Carpet), front-right of the round tables just below Post 2 and left of VIP 2.",
+        guests: [
+          "Gabriel Agonoy",
+          "Emman Henry Diwa",
+          "Thalia Joy Diwa",
+          "Ethan Harris Diwa",
+          "Euan Harry Diwa",
+          "Marjorie Avenido",
+          "Jerimae Avenido",
+          "Rejean Denulan",
+          "Alex De Guia; Callie",
+          "Diannara De Guia"
+        ]
+      },
+      {
+        id: "ROUND TABLE 3",
+        label: "Round Table 3",
+        shortLabel: "3",
+        type: "round",
+        section: "upper",
+        shape: "circle",
+        x: 446,
+        y: 86,
+        r: 33,
+        landmark: "Upper side (above the Center Carpet), near the top wall corridor to the upper-left of Table 1.",
+        guests: [
+          "Jojo Faustino",
+          "Samson Atuel",
+          "Grace Atuel",
+          "Lovelyn Prats",
+          "Andy Borja",
+          "Florida Flores",
+          "Dorothy Borja",
+          "Donato Borja"
+        ]
+      },
+      {
+        id: "ROUND TABLE 4",
+        label: "Round Table 4",
+        shortLabel: "4",
+        type: "round",
+        section: "lower",
+        shape: "circle",
+        x: 446,
+        y: 438,
+        r: 33,
+        landmark: "Lower side (below the Center Carpet), along the bottom wall to the lower-left of Table 2.",
+        guests: [
+          "Ryan Sy",
+          "Rhiandel Sy",
+          "Rhinadel Sy",
+          "Ludivina Diwa",
+          "Rodolfo Diwa",
+          "Monina Diwa",
+          "Rico Diwa",
+          "Angel Teñoso",
+          "Victor Teñoso",
+          "Nida De Guia"
+        ]
+      },
+      {
+        id: "ROUND TABLE 5",
+        label: "Round Table 5",
+        shortLabel: "5",
+        type: "round",
+        section: "upper",
+        shape: "circle",
+        x: 405,
+        y: 185,
+        r: 33,
+        landmark: "Upper-middle section, just above the Center Carpet between Table 7 and Post 1 / Table 1.",
+        guests: [
+          "Ma. Janina Joy Fernandez",
+          "Erika Joy Valdez",
+          "Justeen Ramasasa",
+          "EJ Enriquez",
+          "Joseph De Mata",
+          "Ma. Precious Delos Santos",
+          "Lorraine Paguagan",
+          "Ricajel Gadacho",
+          "Christy Ann Guevarra",
+          "Angelica Roldan"
+        ]
+      },
+      {
+        id: "ROUND TABLE 6",
+        label: "Round Table 6",
+        shortLabel: "6",
+        type: "round",
+        section: "lower",
+        shape: "circle",
+        x: 405,
+        y: 342,
+        r: 33,
+        landmark: "Lower-middle section, just below the Center Carpet between Table 8 and Post 2 / Table 2.",
+        guests: [
+          "Mark Benjar Bartolome",
+          "Joshua Marasigan",
+          "Harold Navarette",
+          "Jonnel Mariano",
+          "Mark Delos Reyes",
+          "Gabo Potestades",
+          "Oliver Añonuevo",
+          "Jervin Jake Alquero",
+          "Rhenzo Timpug",
+          "Christopher Vinluan"
+        ]
+      },
+      {
+        id: "ROUND TABLE 7",
+        label: "Round Table 7",
+        shortLabel: "7",
+        type: "round",
+        section: "upper",
+        shape: "circle",
+        x: 300,
+        y: 192,
+        r: 33,
+        landmark: "Upper-left section, right of the Buffet station and just above the left end of the Center Carpet.",
+        guests: [
+          "Mike Dimatulac",
+          "Gemma Dimatulac",
+          "Mitch Dimatulac",
+          "Philip Corpuz",
+          "Jerica Alquero",
+          "John Lloyd Alquero",
+          "Gloria Alquero",
+          "Jinky Alquero",
+          "Jemaima Narvasa",
+          "Beatrix Muli"
+        ]
+      },
+      {
+        id: "ROUND TABLE 8",
+        label: "Round Table 8",
+        shortLabel: "8",
+        type: "round",
+        section: "lower",
+        shape: "circle",
+        x: 278,
+        y: 336,
+        r: 33,
+        landmark: "Lower-left section, just below the left end of the Center Carpet and above the Bottom Entrance.",
+        guests: [
+          "Ryou Maehana",
+          "Ryan Lester De Castro",
+          "Kenneth Fernandez",
+          "Bryan Paul Agustin",
+          "Marjorie Ancheta",
+          "Queenie Pascua",
+          "Brian Dastas",
+          "Berwyn Dino",
+          "Airish Villegas",
+          "Henry Maliksi"
+        ]
+      },
+      {
+        id: "ROUND TABLE 9",
+        label: "Round Table 9",
+        shortLabel: "9",
+        type: "round",
+        section: "upper",
+        shape: "circle",
+        x: 342,
+        y: 88,
+        r: 33,
+        landmark: "Upper-left section near the top wall, to the right of the Buffet and left of Table 3.",
+        guests: [
+          "Hazel Berong",
+          "Jasha Quirol",
+          "Zeya Berong",
+          "Florifel Tuquib",
+          "Michelle Borja",
+          "Shiela Borja",
+          "Catherine Gajol",
+          "Freb Manlutac",
+          "Trisha Gajol",
+          "Adenoel Ercilla"
+        ]
+      },
+      {
+        id: "ROUND TABLE 10",
+        label: "Round Table 10",
+        shortLabel: "10",
+        type: "round",
+        section: "lower",
+        shape: "circle",
+        x: 342,
+        y: 428,
+        r: 33,
+        landmark: "Lower-middle section, right above the Bottom Entrance between Table 8 and Table 4.",
+        guests: [
+          "Ckorin Calpito",
+          "Czarina Cordova",
+          "Nicko Feliciano",
+          "Ed Bundalian",
+          "Adelina Bundalian",
+          "Vladimir Gutierrez",
+          "Melvin Catu",
+          "Aurora Catu",
+          "Benjamin Mira",
+          "Kris Ladera"
+        ]
+      }
+    ];
+
+    // Build flattened guest index for instant lookup
+    const ALL_GUESTS = [];
+    SEATING_DATA.forEach(table => {
+      table.guests.forEach(guestName => {
+        ALL_GUESTS.push({
+          name: guestName,
+          tableId: table.id,
+          tableLabel: table.label,
+          tableType: table.type,
+          landmark: table.landmark
+        });
+      });
+    });
+
+    // 2. STATE & DOM ELEMENTS
+    let selectedGuestName = null;
+    let selectedTableId = null;
+    let activeFilter = "all";
+    let dirSortMode = "alpha";
+    let currentZoom = 1;
+
+    const searchInput = document.getElementById("guestSearchInput");
+    const clearSearchBtn = document.getElementById("clearSearchBtn");
+    const autocompleteDropdown = document.getElementById("autocompleteDropdown");
+
+    const resultCard = document.getElementById("resultCard");
+    const resultGuestName = document.getElementById("resultGuestName");
+    const resultTableBadge = document.getElementById("resultTableBadge");
+    const resultLandmarkText = document.getElementById("resultLandmarkText");
+    const resultSeatCount = document.getElementById("resultSeatCount");
+    const resultTablematesList = document.getElementById("resultTablematesList");
+    const locateOnMapBtn = document.getElementById("locateOnMapBtn");
+    const clearSelectionBtn = document.getElementById("clearSelectionBtn");
+
+    const tabFloorPlan = document.getElementById("tabFloorPlan");
+    const tabDirectory = document.getElementById("tabDirectory");
+    const floorPlanFilters = document.getElementById("floorPlanFilters");
+    const floorPlanView = document.getElementById("floorPlanView");
+    const directoryView = document.getElementById("directoryView");
+
+    const svgTablesLayer = document.getElementById("svgTablesLayer");
+    const blueprintViewport = document.getElementById("blueprintViewport");
+    const blueprintCanvas = document.getElementById("blueprintCanvas");
+
+    const inspectorEmptyState = document.getElementById("inspectorEmptyState");
+    const inspectorPopulatedState = document.getElementById("inspectorPopulatedState");
+    const inspectorTitle = document.getElementById("inspectorTitle");
+    const inspectorCountBadge = document.getElementById("inspectorCountBadge");
+    const inspectorLandmark = document.getElementById("inspectorLandmark");
+    const inspectorGuestList = document.getElementById("inspectorGuestList");
+
+    const dirSortAlphaBtn = document.getElementById("dirSortAlphaBtn");
+    const dirSortTableBtn = document.getElementById("dirSortTableBtn");
+    const directoryContent = document.getElementById("directoryContent");
+
+    // 3. HELPER FUNCTIONS
+    function normalizeText(str) {
+      return str
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function getTableById(tableId) {
+      return SEATING_DATA.find(t => t.id === tableId);
+    }
+
+    // 4. RENDER INTERACTIVE TABLES ON THE GARDEN HIVE SVG FLOOR PLAN
+    function renderFloorPlanTables() {
+      const svgNS = "http://www.w3.org/2000/svg";
+      svgTablesLayer.innerHTML = "";
+
+      SEATING_DATA.forEach(table => {
+        const g = document.createElementNS(svgNS, "g");
+        g.setAttribute("class", `svg-table-group ${table.type === "vip" ? "is-vip" : ""}`);
+        g.setAttribute("data-table-id", table.id);
+        g.setAttribute("data-section", table.section);
+        g.setAttribute("role", "button");
+        g.setAttribute("tabindex", "0");
+        g.setAttribute("aria-label", `${table.label} with ${table.guests.length} guests`);
+
+        if (table.shape === "rect") {
+          // VIP Rectangular Banquet Table (Dusty Slate Blue with Antique Champagne Trim)
+          const rx = table.x - table.width / 2;
+          const ry = table.y - table.height / 2;
+
+          const rect = document.createElementNS(svgNS, "rect");
+          rect.setAttribute("class", "table-shape");
+          rect.setAttribute("x", rx);
+          rect.setAttribute("y", ry);
+          rect.setAttribute("width", table.width);
+          rect.setAttribute("height", table.height);
+          rect.setAttribute("rx", "8");
+          rect.setAttribute("fill", "#4A6B82");
+          rect.setAttribute("stroke", "#B59E7A");
+          rect.setAttribute("stroke-width", "2.4");
+
+          const title = document.createElementNS(svgNS, "text");
+          title.setAttribute("x", table.x);
+          title.setAttribute("y", table.y - 2);
+          title.setAttribute("text-anchor", "middle");
+          title.setAttribute("font-size", "14");
+          title.setAttribute("font-weight", "800");
+          title.setAttribute("fill", "#FFFFFF");
+          title.setAttribute("letter-spacing", "1.5");
+          title.textContent = table.label;
+
+          const sub = document.createElementNS(svgNS, "text");
+          sub.setAttribute("x", table.x);
+          sub.setAttribute("y", table.y + 13);
+          sub.setAttribute("text-anchor", "middle");
+          sub.setAttribute("font-size", "9.5");
+          sub.setAttribute("font-weight", "600");
+          sub.setAttribute("fill", "#DCE8F1");
+          sub.textContent = `${table.guests.length} VIP Guests`;
+
+          g.appendChild(rect);
+          g.appendChild(title);
+          g.appendChild(sub);
+        } else {
+          // Round Guest Table (Porcelain White with Deep Dusty Blue Border)
+          const pulseCircle = document.createElementNS(svgNS, "circle");
+          pulseCircle.setAttribute("class", "pulse-ring hidden");
+          pulseCircle.setAttribute("cx", table.x);
+          pulseCircle.setAttribute("cy", table.y);
+          pulseCircle.setAttribute("r", table.r);
+
+          const circle = document.createElementNS(svgNS, "circle");
+          circle.setAttribute("class", "table-shape");
+          circle.setAttribute("cx", table.x);
+          circle.setAttribute("cy", table.y);
+          circle.setAttribute("r", table.r);
+          circle.setAttribute("fill", "#F7FAFC");
+          circle.setAttribute("stroke", "#4A6B82");
+          circle.setAttribute("stroke-width", "2.2");
+
+          const topLabel = document.createElementNS(svgNS, "text");
+          topLabel.setAttribute("x", table.x);
+          topLabel.setAttribute("y", table.y - 11);
+          topLabel.setAttribute("text-anchor", "middle");
+          topLabel.setAttribute("font-size", "7.5");
+          topLabel.setAttribute("font-weight", "700");
+          topLabel.setAttribute("fill", "#6B8EA6");
+          topLabel.setAttribute("letter-spacing", "0.6");
+          topLabel.textContent = "TABLE";
+
+          const numText = document.createElementNS(svgNS, "text");
+          numText.setAttribute("x", table.x);
+          numText.setAttribute("y", table.y + 8);
+          numText.setAttribute("text-anchor", "middle");
+          numText.setAttribute("font-family", "Playfair Display, Georgia, serif");
+          numText.setAttribute("font-size", "18");
+          numText.setAttribute("font-weight", "700");
+          numText.setAttribute("fill", "#233542");
+          numText.textContent = table.shortLabel;
+
+          const countText = document.createElementNS(svgNS, "text");
+          countText.setAttribute("x", table.x);
+          countText.setAttribute("y", table.y + 20);
+          countText.setAttribute("text-anchor", "middle");
+          countText.setAttribute("font-size", "7.5");
+          countText.setAttribute("font-weight", "600");
+          countText.setAttribute("fill", "#5C707E");
+          countText.textContent = `${table.guests.length} pax`;
+
+          g.appendChild(pulseCircle);
+          g.appendChild(circle);
+          g.appendChild(topLabel);
+          g.appendChild(numText);
+          g.appendChild(countText);
+        }
+
+        // Click & Keyboard handlers
+        const handleSelect = () => {
+          selectTableOnMap(table.id, selectedGuestName);
+        };
+        g.addEventListener("click", handleSelect);
+        g.addEventListener("keydown", e => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            handleSelect();
+          }
+        });
+
+        svgTablesLayer.appendChild(g);
+      });
+    }
+
+    // 5. UPDATE MAP VISUAL HIGHLIGHTING & INSPECTOR PANEL
+    function syncMapVisualState() {
+      const groups = svgTablesLayer.querySelectorAll(".svg-table-group");
+
+      groups.forEach(group => {
+        const id = group.getAttribute("data-table-id");
+        const section = group.getAttribute("data-section");
+        const pulseRing = group.querySelector(".pulse-ring");
+
+        group.classList.remove("is-highlighted", "is-dimmed");
+        if (pulseRing) pulseRing.classList.add("hidden");
+
+        // Determine if dimmed by filter or active selection
+        const matchesFilter = activeFilter === "all" || activeFilter === section;
+
+        if (selectedTableId) {
+          if (id === selectedTableId) {
+            group.classList.add("is-highlighted");
+            if (pulseRing) pulseRing.classList.remove("hidden");
+          } else {
+            group.classList.add("is-dimmed");
+          }
+        } else if (!matchesFilter) {
+          group.classList.add("is-dimmed");
+        }
+      });
+    }
+
+    function selectTableOnMap(tableId, highlightGuest = null) {
+      const table = getTableById(tableId);
+      if (!table) return;
+
+      selectedTableId = tableId;
+      syncMapVisualState();
+
+      // Populate Inspector Card
+      inspectorEmptyState.classList.add("hidden");
+      inspectorPopulatedState.classList.remove("hidden");
+
+      inspectorTitle.textContent = table.label;
+      inspectorCountBadge.textContent = `${table.guests.length} Guests`;
+      inspectorCountBadge.className = `badge ${table.type === "vip" ? "badge-vip" : "badge-round"}`;
+      inspectorLandmark.innerHTML = `<strong>Location:</strong> ${table.landmark}`;
+
+      inspectorGuestList.innerHTML = "";
+      table.guests.forEach((guest, index) => {
+        const isMatch = highlightGuest && guest === highlightGuest;
+        const li = document.createElement("li");
+        li.className = `inspector-guest ${isMatch ? "highlight-guest" : ""}`;
+        li.innerHTML = `
+          <div style="display:flex; align-items:center;">
+            <span class="seat-num">${index + 1}</span>
+            <span>${guest}</span>
+          </div>
+          ${isMatch ? '<span style="font-size:0.68rem; text-transform:uppercase; color:var(--burgundy);">Selected</span>' : ""}
+        `;
+        inspectorGuestList.appendChild(li);
+      });
+    }
+
+    function scrollAndPanToTable(tableId) {
+      switchMainTab("floorPlan");
+      activeFilter = "all";
+      updateFilterPillsUI();
+      selectTableOnMap(tableId, selectedGuestName);
+
+      const table = getTableById(tableId);
+      if (!table) return;
+
+      // Smoothly scroll viewport to the floor plan card
+      floorPlanView.scrollIntoView({ behavior: "smooth", block: "center" });
+
+      // Smoothly pan horizontal scroll container on mobile so the table is centered
+      setTimeout(() => {
+        const canvasWidth = blueprintCanvas.offsetWidth * currentZoom;
+        const viewportWidth = blueprintViewport.clientWidth;
+        if (canvasWidth > viewportWidth) {
+          const ratioX = table.x / 960;
+          const targetScrollLeft = ratioX * canvasWidth - viewportWidth / 2;
+          blueprintViewport.scrollTo({
+            left: Math.max(0, targetScrollLeft),
+            behavior: "smooth"
+          });
+        }
+      }, 220);
+    }
+
+    // 6. SEARCH & AUTOCOMPLETE LOGIC
+    function handleSearchInput() {
+      const raw = searchInput.value.trim();
+      const query = normalizeText(raw);
+
+      if (raw.length > 0) {
+        clearSearchBtn.classList.remove("hidden");
+      } else {
+        clearSearchBtn.classList.add("hidden");
+        autocompleteDropdown.classList.add("hidden");
+        return;
+      }
+
+      const matchedGuests = ALL_GUESTS.filter(g =>
+        normalizeText(g.name).includes(query) ||
+        normalizeText(g.tableLabel).includes(query)
+      );
+
+      const matchedTables = SEATING_DATA.filter(t =>
+        normalizeText(t.label).includes(query)
+      );
+
+      renderAutocomplete(matchedGuests, matchedTables, raw);
+    }
+
+    function renderAutocomplete(matchedGuests, matchedTables, rawQuery) {
+      autocompleteDropdown.innerHTML = "";
+
+      if (matchedGuests.length === 0 && matchedTables.length === 0) {
+        autocompleteDropdown.innerHTML = `
+          <div style="padding:1.1rem; text-align:center; font-size:0.88rem; color:var(--text-muted);">
+            No guests or tables found matching "<strong>${rawQuery}</strong>".
+          </div>
+        `;
+        autocompleteDropdown.classList.remove("hidden");
+        return;
+      }
+
+      // Show direct table matches if user typed e.g. "VIP" or "Table 3"
+      if (matchedTables.length > 0 && rawQuery.length >= 2) {
+        matchedTables.slice(0, 3).forEach(table => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "dropdown-item";
+          btn.innerHTML = `
+            <div>
+              <span class="dropdown-name">${table.label}</span>
+              <span class="dropdown-sub">View entire table (${table.guests.length} guests)</span>
+            </div>
+            <span class="badge ${table.type === "vip" ? "badge-vip" : "badge-round"}">Table</span>
+          `;
+          btn.addEventListener("click", () => {
+            autocompleteDropdown.classList.add("hidden");
+            selectTableAssignment(table.id);
+          });
+          autocompleteDropdown.appendChild(btn);
+        });
+      }
+
+      matchedGuests.slice(0, 15).forEach(guest => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "dropdown-item";
+        btn.innerHTML = `
+          <div>
+            <span class="dropdown-name">${guest.name}</span>
+          </div>
+          <span class="badge ${guest.tableType === "vip" ? "badge-vip" : "badge-round"}">
+            ${guest.tableLabel}
+          </span>
+        `;
+        btn.addEventListener("click", () => {
+          selectGuestAssignment(guest.name, guest.tableId);
+        });
+        autocompleteDropdown.appendChild(btn);
+      });
+
+      autocompleteDropdown.classList.remove("hidden");
+    }
+
+    function selectGuestAssignment(guestName, tableId) {
+      const table = getTableById(tableId);
+      if (!table) return;
+
+      selectedGuestName = guestName;
+      selectedTableId = tableId;
+      searchInput.value = guestName;
+      clearSearchBtn.classList.remove("hidden");
+      autocompleteDropdown.classList.add("hidden");
+
+      // Populate Seat Assignment Card
+      resultGuestName.textContent = guestName;
+      resultTableBadge.textContent = table.label;
+      resultTableBadge.className = `badge ${table.type === "vip" ? "badge-vip" : "badge-round"}`;
+      resultLandmarkText.textContent = table.landmark;
+      resultSeatCount.textContent = table.guests.length;
+
+      resultTablematesList.innerHTML = "";
+      table.guests.forEach(member => {
+        const isCurrent = member === guestName;
+        const li = document.createElement("li");
+        li.className = `tablemate-item ${isCurrent ? "is-selected" : ""}`;
+        li.innerHTML = `
+          <span class="dot"></span>
+          <span>${member}${isCurrent ? " (You)" : ""}</span>
+        `;
+        resultTablematesList.appendChild(li);
+      });
+
+      resultCard.classList.remove("hidden");
+      selectTableOnMap(tableId, guestName);
+    }
+
+    function selectTableAssignment(tableId) {
+      const table = getTableById(tableId);
+      if (!table) return;
+
+      selectedGuestName = null;
+      selectedTableId = tableId;
+      searchInput.value = table.label;
+      clearSearchBtn.classList.remove("hidden");
+
+      resultGuestName.textContent = table.label;
+      resultTableBadge.textContent = table.type === "vip" ? "VIP Banquet" : "Round Table";
+      resultTableBadge.className = `badge ${table.type === "vip" ? "badge-vip" : "badge-round"}`;
+      resultLandmarkText.textContent = table.landmark;
+      resultSeatCount.textContent = table.guests.length;
+
+      resultTablematesList.innerHTML = "";
+      table.guests.forEach(member => {
+        const li = document.createElement("li");
+        li.className = "tablemate-item";
+        li.innerHTML = `
+          <span class="dot"></span>
+          <span>${member}</span>
+        `;
+        resultTablematesList.appendChild(li);
+      });
+
+      resultCard.classList.remove("hidden");
+      selectTableOnMap(tableId, null);
+    }
+
+    function clearAllSelection() {
+      selectedGuestName = null;
+      selectedTableId = null;
+      searchInput.value = "";
+      clearSearchBtn.classList.add("hidden");
+      autocompleteDropdown.classList.add("hidden");
+      resultCard.classList.add("hidden");
+      inspectorEmptyState.classList.remove("hidden");
+      inspectorPopulatedState.classList.add("hidden");
+      syncMapVisualState();
+    }
+
+    // 7. DIRECTORY RENDERING (A-Z OR BY TABLE)
+    function renderDirectory() {
+      directoryContent.innerHTML = "";
+
+      if (dirSortMode === "alpha") {
+        const sorted = [...ALL_GUESTS].sort((a, b) =>
+          a.name.replace(/^\+/, "").localeCompare(b.name.replace(/^\+/, ""))
+        );
+
+        const groups = {};
+        sorted.forEach(g => {
+          const letter = g.name.replace(/^\+/, "").charAt(0).toUpperCase();
+          if (!groups[letter]) groups[letter] = [];
+          groups[letter].push(g);
+        });
+
+        Object.keys(groups).sort().forEach(letter => {
+          const section = document.createElement("div");
+          section.className = "alpha-group";
+
+          const itemsHtml = groups[letter].map(g => `
+            <button type="button" class="alpha-item-btn" data-guest="${g.name}" data-table="${g.tableId}">
+              <span style="font-weight:600; font-size:0.88rem; color:var(--text-charcoal);">${g.name}</span>
+              <span class="badge ${g.tableType === "vip" ? "badge-vip" : "badge-round"}">${g.tableLabel}</span>
+            </button>
+          `).join("");
+
+          section.innerHTML = `
+            <div class="alpha-letter-row">
+              <span class="alpha-badge">${letter}</span>
+              <div class="alpha-line"></div>
+            </div>
+            <div class="alpha-grid">${itemsHtml}</div>
+          `;
+          directoryContent.appendChild(section);
+        });
+      } else {
+        const grid = document.createElement("div");
+        grid.className = "dir-tables-grid";
+
+        SEATING_DATA.forEach(table => {
+          const box = document.createElement("div");
+          box.className = "dir-table-box";
+
+          const guestsHtml = table.guests.map(g => `
+            <li>
+              <button type="button" class="dir-guest-btn" data-guest="${g}" data-table="${table.id}">
+                <span>${g}</span>
+                <span style="font-size:0.72rem; color:var(--burgundy); font-weight:600;">Locate →</span>
+              </button>
+            </li>
+          `).join("");
+
+          box.innerHTML = `
+            <div>
+              <div class="dir-table-head">
+                <h3>${table.label}</h3>
+                <span class="badge ${table.type === "vip" ? "badge-vip" : "badge-round"}">${table.guests.length} Seats</span>
+              </div>
+              <ul class="dir-guest-list">${guestsHtml}</ul>
+            </div>
+            <button type="button" class="btn-secondary" style="margin-top:0.9rem; width:100%;" data-locate-table="${table.id}">
+              Show on Floor Plan
+            </button>
+          `;
+          grid.appendChild(box);
+        });
+
+        directoryContent.appendChild(grid);
+      }
+
+      // Attach click events to directory buttons
+      directoryContent.querySelectorAll("[data-guest]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const gName = btn.getAttribute("data-guest");
+          const tId = btn.getAttribute("data-table");
+          selectGuestAssignment(gName, tId);
+          scrollAndPanToTable(tId);
+        });
+      });
+
+      directoryContent.querySelectorAll("[data-locate-table]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const tId = btn.getAttribute("data-locate-table");
+          selectTableAssignment(tId);
+          scrollAndPanToTable(tId);
+        });
+      });
+    }
+
+    // 8. TAB, FILTER & ZOOM EVENT LISTENERS
+    function switchMainTab(tabName) {
+      if (tabName === "floorPlan") {
+        floorPlanView.classList.remove("hidden");
+        floorPlanFilters.classList.remove("hidden");
+        directoryView.classList.add("hidden");
+        tabFloorPlan.classList.add("active");
+        tabFloorPlan.setAttribute("aria-selected", "true");
+        tabDirectory.classList.remove("active");
+        tabDirectory.setAttribute("aria-selected", "false");
+      } else {
+        floorPlanView.classList.add("hidden");
+        floorPlanFilters.classList.add("hidden");
+        directoryView.classList.remove("hidden");
+        tabDirectory.classList.add("active");
+        tabDirectory.setAttribute("aria-selected", "true");
+        tabFloorPlan.classList.remove("active");
+        tabFloorPlan.setAttribute("aria-selected", "false");
+        renderDirectory();
+      }
+    }
+
+    function updateFilterPillsUI() {
+      floorPlanFilters.querySelectorAll(".pill-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.getAttribute("data-filter") === activeFilter);
+      });
+    }
+
+    function applyZoom(newZoom) {
+      currentZoom = Math.min(1.5, Math.max(0.85, newZoom));
+      blueprintCanvas.style.width = `${currentZoom * 100}%`;
+      document.getElementById("zoomResetBtn").textContent = `${Math.round(currentZoom * 100)}%`;
+    }
+
+    searchInput.addEventListener("input", handleSearchInput);
+    searchInput.addEventListener("focus", () => {
+      if (searchInput.value.trim().length > 0) handleSearchInput();
+    });
+
+    clearSearchBtn.addEventListener("click", () => {
+      clearAllSelection();
+      searchInput.focus();
+    });
+
+    document.addEventListener("click", e => {
+      if (!searchInput.contains(e.target) && !autocompleteDropdown.contains(e.target)) {
+        autocompleteDropdown.classList.add("hidden");
+      }
+    });
+
+    locateOnMapBtn.addEventListener("click", () => {
+      if (selectedTableId) {
+        scrollAndPanToTable(selectedTableId);
+      }
+    });
+
+    clearSelectionBtn.addEventListener("click", clearAllSelection);
+
+    tabFloorPlan.addEventListener("click", () => switchMainTab("floorPlan"));
+    tabDirectory.addEventListener("click", () => switchMainTab("directory"));
+
+    floorPlanFilters.querySelectorAll(".pill-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        activeFilter = btn.getAttribute("data-filter");
+        selectedTableId = null;
+        selectedGuestName = null;
+        inspectorEmptyState.classList.remove("hidden");
+        inspectorPopulatedState.classList.add("hidden");
+        updateFilterPillsUI();
+        syncMapVisualState();
+      });
+    });
+
+    dirSortAlphaBtn.addEventListener("click", () => {
+      dirSortMode = "alpha";
+      dirSortAlphaBtn.classList.add("active");
+      dirSortTableBtn.classList.remove("active");
+      renderDirectory();
+    });
+
+    dirSortTableBtn.addEventListener("click", () => {
+      dirSortMode = "table";
+      dirSortTableBtn.classList.add("active");
+      dirSortAlphaBtn.classList.remove("active");
+      renderDirectory();
+    });
+
+    document.getElementById("zoomInBtn").addEventListener("click", () => applyZoom(currentZoom + 0.15));
+    document.getElementById("zoomOutBtn").addEventListener("click", () => applyZoom(currentZoom - 0.15));
+    document.getElementById("zoomResetBtn").addEventListener("click", () => applyZoom(1));
+
+    // 9. INITIALIZE APPLICATION
+    window.addEventListener("DOMContentLoaded", () => {
+      renderFloorPlanTables();
+      renderDirectory();
+    });
+  </script>
+</body>
+</html>
